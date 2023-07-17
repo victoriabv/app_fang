@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "301350582255",
+    "project_id": "fangstorage-ddbb",
+    "storage_bucket": "fangstorage-ddbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301350582255:android:3e4afe1e015e3aa4ea681a",
+        "android_client_info": {
+          "package_name": "com.example.fang"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "301350582255-rhdq779v92r3m6l12hts960ok2brl6id.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgSBee4B6SrtHw5XTP7BdadyNn7ccKlxs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "301350582255-rhdq779v92r3m6l12hts960ok2brl6id.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
