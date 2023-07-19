@@ -1,12 +1,7 @@
-import 'dart:io';
-
 import 'package:fang/AppBarWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'ImageMethods.dart';
 
 class ProcesPage extends StatefulWidget {
@@ -39,7 +34,7 @@ class _ProcesPageState extends State<ProcesPage> {
   final CollectionReference _galeria =
       FirebaseFirestore.instance.collection('galeria');
 
-  Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
+  Future<void> _create() async {
     _idController.clear();
     _nomController.clear();
     _fregar = false;
@@ -580,7 +575,6 @@ class _ProcesPageState extends State<ProcesPage> {
                               final String esmalts = _esmaltsController.text;
                               final String observacions =
                                   _observacionsController.text;
-                              if (nom != null) {
                                 await _proces.doc(documentSnapshot!.id).update({
                                   "id": id,
                                   "nom": nom,
@@ -606,7 +600,6 @@ class _ProcesPageState extends State<ProcesPage> {
                                 _esmaltsController.clear();
                                 _observacionsController.clear();
                                 Navigator.of(context).pop();
-                              }
                             },
                           ),
                         ),
@@ -651,7 +644,6 @@ class _ProcesPageState extends State<ProcesPage> {
                                                 _esmaltsController.text;
                                             final String observacions =
                                                 _observacionsController.text;
-                                            if (id != null) {
                                               await _galeria.add({
                                                 "id": id,
                                                 "nom": nom,
@@ -661,8 +653,6 @@ class _ProcesPageState extends State<ProcesPage> {
                                                 "imageUrl": imageUrl,
                                               });
                                               Navigator.of(context).pop();
-                                            }
-                                            Navigator.pop(context);
                                           },
                                         ),
                                         ListTile(
@@ -683,7 +673,6 @@ class _ProcesPageState extends State<ProcesPage> {
                                                 _esmaltsController.text;
                                             final String observacions =
                                                 _observacionsController.text;
-                                            if (id != null) {
                                               await _galeria.add({
                                                 "id": id,
                                                 "nom": nom,
@@ -693,8 +682,6 @@ class _ProcesPageState extends State<ProcesPage> {
                                                 "imageUrl": imageUrl,
                                               });
                                               Navigator.of(context).pop();
-                                            }
-                                            Navigator.pop(context);
                                           },
                                         ),
                                       ],
@@ -775,7 +762,7 @@ class _ProcesPageState extends State<ProcesPage> {
         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
           if (streamSnapshot.hasData) {
             final docs = streamSnapshot.data!.docs;
-
+            //si ho volem ordernar per id, substituim tot el docs.sort per aquesta docs.sort((a, b) => (a['id'] as String).compareTo(b['id'] as String));
             // Ordena los documentos según la cantidad de parámetros true (fregar, coure_1, esmaltar, coure_2)
             docs.sort((a, b) {
               int aTrueCount = 0;
@@ -789,7 +776,6 @@ class _ProcesPageState extends State<ProcesPage> {
               if (b['coure_1'] == true) bTrueCount++;
               if (b['esmaltar'] == true) bTrueCount++;
               if (b['coure_2'] == true) bTrueCount++;
-
               // Ordena en orden descendente por cantidad de parámetros true
               return bTrueCount.compareTo(aTrueCount);
             });
