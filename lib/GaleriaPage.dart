@@ -649,178 +649,204 @@ class _GaleriaPageState extends State<GaleriaPage> {
     }
   }
 
+
+
   Future<void> _showDetails(DocumentSnapshot documentSnapshot) async {
+    List<DocumentSnapshot> galleryData = []; // Contendrá los datos de todas las imágenes en la galería
+    QuerySnapshot snapshot = await _galeria.get();
+    galleryData = snapshot.docs;
+
+    int currentIndex = galleryData.indexWhere((element) => element.id == documentSnapshot.id);
+
     await showDialog(
       context: context,
       builder: (BuildContext ctx) {
-        return AlertDialog(
-          title: Text(documentSnapshot['nom']),
-          content: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.of(ctx).push(
-                      MaterialPageRoute<void>(
-                        fullscreenDialog: true,
-                        builder: (BuildContext ctx) {
-                          return Scaffold(
-                            backgroundColor: Colors.black,
-                            body: GestureDetector(
-                              child: Center(
-                                child: Hero(
-                                  tag: "customTag",
-                                  child: Image.network(
-                                    documentSnapshot['imageUrl'],
-                                    fit: BoxFit.contain,
-                                  ),
+        return Dialog(
+          insetPadding: EdgeInsets.all(0),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: 100,
+              maxHeight: MediaQuery.of(ctx).size.height * 0.8, // Ajusta la altura máxima según tus necesidades
+            ),
+            child: PageView.builder(
+              controller: PageController(initialPage: currentIndex),
+              itemCount: galleryData.length,
+              itemBuilder: (BuildContext context, int index) {
+                DocumentSnapshot currentSnapshot = galleryData[index];
+                return SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(50.0), // Ajustar el padding inferior a 0
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(ctx).push(
+                              MaterialPageRoute<void>(
+                                fullscreenDialog: true,
+                                builder: (BuildContext ctx) {
+                                  return Scaffold(
+                                    backgroundColor: Colors.black,
+                                    body: GestureDetector(
+                                      child: Center(
+                                        child: Hero(
+                                          tag: "customTag",
+                                          child: Image.network(
+                                            currentSnapshot['imageUrl'],
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          child: Center(
+                            child: Image.network(
+                              currentSnapshot['imageUrl'],
+                              width: 250,
+                              height: 250,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Row(
+                          children: [
+                            Flexible(
+                              flex: 1,
+                              child: Text(
+                                'Id: ',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: _grana,
                                 ),
                               ),
                             ),
-                          );
-                        },
-                      ),
-                    );
-                  },
-                  child: Center(
-                    child: Image.network(
-                      documentSnapshot['imageUrl'],
-                      width: 200,
-                      height: 200,
-                      fit: BoxFit.cover,
+                            Flexible(
+                              flex: 2,
+                              child: Text(
+                                '${currentSnapshot['id']}',
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Flexible(
+                              flex: 1,
+                              child: Text(
+                                'Fang: ',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: _grana,
+                                ),
+                              ),
+                            ),
+                            Flexible(
+                              flex: 2,
+                              child: Text(
+                                '${currentSnapshot['fang']}',
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Flexible(
+                              flex: 1,
+                              child: Text(
+                                'Esmalts: ',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: _grana,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Flexible(
+                              flex: 2,
+                              child: Text(
+                                '${currentSnapshot['esmalts']}',
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Flexible(
+                              flex: 2,
+                              child: Text(
+                                'Observacions: ',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: _grana,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Flexible(
+                              flex: 2,
+                              child: Text(
+                                '${currentSnapshot['observacions']}',
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.edit),
+                              onPressed: () {
+                                Navigator.of(ctx).pop();
+                                _update(currentSnapshot);
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.delete),
+                              onPressed: () {
+                                Navigator.of(ctx).pop();
+                                _delete(currentSnapshot.id);
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.close),
+                              onPressed: () {
+                                Navigator.of(ctx).pop();
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                SizedBox(
-                    height: 10), // Separación entre la imagen y el primer Row
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 1,
-                      child: Text(
-                        'Id: ',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: _grana,
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 2,
-                      child: Text(
-                        '${documentSnapshot['id']}',
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                    height: 10), // Separación entre el primer y segundo Row
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 1,
-                      child: Text(
-                        'Fang: ',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: _grana,
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 2,
-                      child: Text(
-                        '${documentSnapshot['fang']}',
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                    height: 10), // Separación entre el segundo y tercer Row
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 1,
-                      child: Text(
-                        'Esmalts: ',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: _grana,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 2,
-                      child: Text(
-                        '${documentSnapshot['esmalts']}',
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10), // Separación entre el tercer y cuarto Row
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 2,
-                      child: Text(
-                        'Observacions: ',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: _grana,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 2,
-                      child: Text(
-                        '${documentSnapshot['observacions']}',
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                );
+              },
             ),
           ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.edit),
-              onPressed: () {
-                Navigator.of(ctx).pop();
-                _update(documentSnapshot);
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.delete),
-              onPressed: () {
-                Navigator.of(ctx).pop();
-                _delete(documentSnapshot.id);
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () {
-                Navigator.of(ctx).pop();
-              },
-            ),
-          ],
         );
       },
     );
   }
+
+
 
   @override
   Widget build(BuildContext context) {
