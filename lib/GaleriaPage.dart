@@ -26,7 +26,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
       FirebaseFirestore.instance.collection('galeria');
 
 
-  Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
+  Future<void> _create() async {
     _idController.clear();
     _nomController.clear();
     _fangController.clear();
@@ -206,7 +206,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
                         ElevatedButton(
                           child: const Text('Cancelar'),
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.grey,
+                            backgroundColor: Colors.grey,
                           ),
                           onPressed: () {
                             Navigator.pop(context);
@@ -216,7 +216,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
                         ElevatedButton(
                           child: const Text('Aceptar'),
                           style: ElevatedButton.styleFrom(
-                            primary: _grana,
+                            backgroundColor: _grana,
                           ),
                           onPressed: () async {
                             final String id = _idController.text;
@@ -553,7 +553,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
                         ElevatedButton(
                           child: const Text('Cancelar'),
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.grey,
+                            backgroundColor: Colors.grey,
                           ),
                           onPressed: () {
                             Navigator.pop(context);
@@ -563,7 +563,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
                         ElevatedButton(
                           child: const Text('Aceptar'),
                           style: ElevatedButton.styleFrom(
-                            primary: _grana,
+                            backgroundColor: _grana,
                           ),
                           onPressed: () async {
                             final String id = _idController.text;
