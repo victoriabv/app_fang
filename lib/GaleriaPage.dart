@@ -588,6 +588,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
                               _esmaltsController.text = '';
                               _observacionsController.text = '';
                               Navigator.of(context).pop();
+                              _showDetails(documentSnapshot);
                             }).catchError((error) =>
                                 print("Error updating document: $error"));
                           },
@@ -653,7 +654,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
 
   Future<void> _showDetails(DocumentSnapshot documentSnapshot) async {
     List<DocumentSnapshot> galleryData = []; // Contendrá los datos de todas las imágenes en la galería
-    QuerySnapshot snapshot = await _galeria.get();
+    QuerySnapshot snapshot = await _galeria.orderBy('id').get();
     galleryData = snapshot.docs;
 
     int currentIndex = galleryData.indexWhere((element) => element.id == documentSnapshot.id);
@@ -703,7 +704,8 @@ class _GaleriaPageState extends State<GaleriaPage> {
                               ),
                             );
                           },
-                          child: Center(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12.0),
                             child: Image.network(
                               currentSnapshot['imageUrl'],
                               width: 250,
