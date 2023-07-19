@@ -774,9 +774,25 @@ class _ProcesPageState extends State<ProcesPage> {
         stream: _proces.snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
           if (streamSnapshot.hasData) {
-            // Recupera los documentos y ordénalos por el campo 'id'
             final docs = streamSnapshot.data!.docs;
-            docs.sort((a, b) => (a['id'] as String).compareTo(b['id'] as String));
+
+            // Ordena los documentos según la cantidad de parámetros true (fregar, coure_1, esmaltar, coure_2)
+            docs.sort((a, b) {
+              int aTrueCount = 0;
+              if (a['fregar'] == true) aTrueCount++;
+              if (a['coure_1'] == true) aTrueCount++;
+              if (a['esmaltar'] == true) aTrueCount++;
+              if (a['coure_2'] == true) aTrueCount++;
+
+              int bTrueCount = 0;
+              if (b['fregar'] == true) bTrueCount++;
+              if (b['coure_1'] == true) bTrueCount++;
+              if (b['esmaltar'] == true) bTrueCount++;
+              if (b['coure_2'] == true) bTrueCount++;
+
+              // Ordena en orden descendente por cantidad de parámetros true
+              return bTrueCount.compareTo(aTrueCount);
+            });
 
             return ListView.builder(
               itemCount: docs.length,
@@ -833,5 +849,6 @@ class _ProcesPageState extends State<ProcesPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
+
 
 }
