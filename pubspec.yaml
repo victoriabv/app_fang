@@ -71,6 +71,7 @@ flutter:
      - assets/img/llosa_icon_2_5.png
      - assets/img/logo_blanc.png
      - assets/img/logo_grana.png
+     - assets/img/logo_teal.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -11,7 +11,8 @@ class ProcesPage extends StatefulWidget {
   _ProcesPageState createState() => _ProcesPageState();
 }
 
-Color _grana = Color.fromARGB(0xFF, 0x6C, 0x1C, 0x24);
+//Color _grana = Color.fromARGB(0xFF, 0x6C, 0x1C, 0x24);
+Color _grana = Colors.teal;
 
 class _ProcesPageState extends State<ProcesPage> {
   final TextEditingController _idController = TextEditingController();

@@ -12,7 +12,8 @@ class GaleriaPage extends StatefulWidget {
   _GaleriaPageState createState() => _GaleriaPageState();
 }
 
-Color _grana = Color.fromARGB(0xFF, 0x6C, 0x1C, 0x24);
+//Color _grana = Color.fromARGB(0xFF, 0x6C, 0x1C, 0x24);
+Color _grana = Colors.teal;
 
 class _GaleriaPageState extends State<GaleriaPage> {
   final TextEditingController _idController = TextEditingController();

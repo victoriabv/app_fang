@@ -43,7 +43,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
-      backgroundColor: backgroundColor,
+      backgroundColor: Colors.teal,
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Image.asset('assets/img/logo_blanc.png'),
