@@ -1,5 +1,6 @@
 import 'package:fang/GaleriaPage.dart';
 import 'package:fang/ProcesPage.dart';
+import 'package:fang/potter_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'constants.dart';
@@ -69,10 +70,7 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.construction, // Aquí puedes cambiar el icono por el que desees
-                          size: 30,
-                        ),
+                        Icon(PotterIcons.potter_icon_1, size: 40),
                         SizedBox(width: 10), // Espacio entre el icono y el texto
                         Text(
                           'Taller',
@@ -115,13 +113,10 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.photo_library, // Aquí puedes cambiar el icono por el que desees
-                          size: 30,
-                        ),
+                        Icon(PotterIcons.potter_icon_2, size: 30),
                         SizedBox(width: 10), // Espacio entre el icono y el texto
                         Text(
-                          'Galeria',
+                          ' Peces',
                           style: TextStyle(
                             fontFamily: fontFamily,
                             fontSize: 24,
