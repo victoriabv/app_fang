@@ -72,6 +72,7 @@ flutter:
      - assets/img/logo_blanc.png
      - assets/img/logo_grana.png
      - assets/img/logo_teal.png
+     - assets/img/logo_teal_blanc.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -120,4 +121,9 @@ flutter:
       fonts:
         - asset: fonts/Tektur/static/Tektur-Regular.ttf
         - asset: fonts/Tektur/static/Tektur-Bold.ttf
+          weight: 700
+    - family: Inconsolata
+      fonts:
+        - asset: fonts/Inconsolata/static/Inconsolata_Condensed-Regular.ttf
+        - asset: fonts/Inconsolata/static/Inconsolata_Condensed-Bold.ttf
           weight: 700
