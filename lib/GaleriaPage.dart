@@ -13,7 +13,7 @@ class GaleriaPage extends StatefulWidget {
 }
 
 //Color _grana = Color.fromARGB(0xFF, 0x6C, 0x1C, 0x24);
-Color _grana = Colors.teal;
+Color _customColor = Colors.teal;
 
 class _GaleriaPageState extends State<GaleriaPage> {
   final TextEditingController _idController = TextEditingController();
@@ -62,10 +62,10 @@ class _GaleriaPageState extends State<GaleriaPage> {
                         labelStyle: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: _grana,
+                          color: _customColor,
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: _grana),
+                          borderSide: BorderSide(color: _customColor),
                         ),
                       ),
                     ),
@@ -76,10 +76,10 @@ class _GaleriaPageState extends State<GaleriaPage> {
                         labelStyle: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: _grana,
+                          color: _customColor,
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: _grana),
+                          borderSide: BorderSide(color: _customColor),
                         ),
                       ),
                     ),
@@ -90,10 +90,10 @@ class _GaleriaPageState extends State<GaleriaPage> {
                         labelStyle: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: _grana,
+                          color: _customColor,
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: _grana),
+                          borderSide: BorderSide(color: _customColor),
                         ),
                       ),
                       items: ['Fang marró', 'Fang vermell', 'Gres', 'Fake gres']
@@ -115,10 +115,10 @@ class _GaleriaPageState extends State<GaleriaPage> {
                         labelStyle: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: _grana,
+                          color: _customColor,
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: _grana),
+                          borderSide: BorderSide(color: _customColor),
                         ),
                       ),
                     ),
@@ -129,10 +129,10 @@ class _GaleriaPageState extends State<GaleriaPage> {
                         labelStyle: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: _grana,
+                          color: _customColor,
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: _grana),
+                          borderSide: BorderSide(color: _customColor),
                         ),
                       ),
                     ),
@@ -217,7 +217,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
                         ElevatedButton(
                           child: const Text('Aceptar'),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: _grana,
+                            backgroundColor: _customColor,
                           ),
                           onPressed: () async {
                             final String id = _idController.text;
@@ -408,10 +408,10 @@ class _GaleriaPageState extends State<GaleriaPage> {
                           labelStyle: TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
-                            color: _grana,
+                            color: _customColor,
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: _grana),
+                            borderSide: BorderSide(color: _customColor),
                           ),
                         ),
                       ),
@@ -423,10 +423,10 @@ class _GaleriaPageState extends State<GaleriaPage> {
                         labelStyle: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: _grana,
+                          color: _customColor,
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: _grana),
+                          borderSide: BorderSide(color: _customColor),
                         ),
                       ),
                     ),
@@ -437,10 +437,10 @@ class _GaleriaPageState extends State<GaleriaPage> {
                         labelStyle: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: _grana,
+                          color: _customColor,
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: _grana),
+                          borderSide: BorderSide(color: _customColor),
                         ),
                       ),
                       items: ['Fang marró', 'Fang vermell', 'Gres', 'Fake gres']
@@ -462,10 +462,10 @@ class _GaleriaPageState extends State<GaleriaPage> {
                         labelStyle: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: _grana,
+                          color: _customColor,
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: _grana),
+                          borderSide: BorderSide(color: _customColor),
                         ),
                       ),
                     ),
@@ -476,10 +476,10 @@ class _GaleriaPageState extends State<GaleriaPage> {
                         labelStyle: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: _grana,
+                          color: _customColor,
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: _grana),
+                          borderSide: BorderSide(color: _customColor),
                         ),
                       ),
                     ),
@@ -564,7 +564,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
                         ElevatedButton(
                           child: const Text('Aceptar'),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: _grana,
+                            backgroundColor: _customColor,
                           ),
                           onPressed: () async {
                             final String id = _idController.text;
@@ -654,7 +654,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
 
 
   Future<void> _showDetails(DocumentSnapshot documentSnapshot) async {
-    List<DocumentSnapshot> galleryData = []; // Contendrá los datos de todas las imágenes en la galería
+    List<DocumentSnapshot> galleryData = [];
     QuerySnapshot snapshot = await _galeria.orderBy('id').get();
     galleryData = snapshot.docs;
 
@@ -668,7 +668,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
           child: ConstrainedBox(
             constraints: BoxConstraints(
               minHeight: 100,
-              maxHeight: MediaQuery.of(ctx).size.height * 0.8, // Ajusta la altura máxima según tus necesidades
+              maxHeight: MediaQuery.of(ctx).size.height * 0.8,
             ),
             child: PageView.builder(
               controller: PageController(initialPage: currentIndex),
@@ -677,9 +677,9 @@ class _GaleriaPageState extends State<GaleriaPage> {
                 DocumentSnapshot currentSnapshot = galleryData[index];
                 return SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.all(50.0), // Ajustar el padding inferior a 0
+                    padding: const EdgeInsets.all(50.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         InkWell(
                           onTap: () {
@@ -725,7 +725,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
-                                  color: _grana,
+                                  color: _customColor,
                                 ),
                               ),
                             ),
@@ -747,7 +747,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
-                                  color: _grana,
+                                  color: _customColor,
                                 ),
                               ),
                             ),
@@ -769,7 +769,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
-                                  color: _grana,
+                                  color: _customColor,
                                 ),
                               ),
                             ),
@@ -795,7 +795,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
-                                  color: _grana,
+                                  color: _customColor,
                                 ),
                               ),
                             ),
@@ -811,12 +811,13 @@ class _GaleriaPageState extends State<GaleriaPage> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 40),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             IconButton(
                               icon: const Icon(Icons.edit),
+                              color: Colors.teal.shade800,
                               onPressed: () {
                                 Navigator.of(ctx).pop();
                                 _update(currentSnapshot);
@@ -824,6 +825,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
                             ),
                             IconButton(
                               icon: const Icon(Icons.delete),
+                              color: Colors.teal.shade800,
                               onPressed: () {
                                 Navigator.of(ctx).pop();
                                 _delete(currentSnapshot.id);
@@ -831,6 +833,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
                             ),
                             IconButton(
                               icon: const Icon(Icons.close),
+                              color: Colors.teal.shade800,
                               onPressed: () {
                                 Navigator.of(ctx).pop();
                               },
@@ -851,11 +854,12 @@ class _GaleriaPageState extends State<GaleriaPage> {
 
 
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
-        backgroundColor: _grana,
+        backgroundColor: _customColor,
         subtitle: 'Galeria',
         onExit: () {
           SystemChannels.platform.invokeMethod('SystemNavigator.pop');
@@ -895,7 +899,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () => _create(),
         child: const Icon(Icons.add),
-        backgroundColor: _grana,
+        backgroundColor: _customColor,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

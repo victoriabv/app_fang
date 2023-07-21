@@ -99,3 +99,25 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+  fonts:
+    - family: Fira_Sans
+      fonts:
+        - asset: fonts/Fira_Sans/FiraSans-Regular.ttf
+        - asset: fonts/Fira_Sans/FiraSans-Bold.ttf
+          weight: 700
+    - family: Victor_Mono
+      fonts:
+        - asset: fonts/Victor_Mono/static/VictorMono-Regular.ttf
+        - asset: fonts/Victor_Mono/static/VictorMono-Bold.ttf
+          weight: 700
+    - family: Montserrat
+      fonts:
+        - asset: fonts/Montserrat/static/Montserrat-Regular.ttf
+        - asset: fonts/Montserrat/static/Montserrat-Bold.ttf
+          weight: 700
+    - family: Tektur
+      fonts:
+        - asset: fonts/Tektur/static/Tektur-Regular.ttf
+        - asset: fonts/Tektur/static/Tektur-Bold.ttf
+          weight: 700

@@ -1,4 +1,3 @@
-import 'package:fang/AppBarWidget.dart';
 import 'package:fang/GaleriaPage.dart';
 import 'package:fang/ProcesPage.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // Color personalizado: #801c24
   //Color _grana = Color.fromARGB(0xFF, 0x6C, 0x1C, 0x24);
-  Color _grana = Colors.teal;
+  Color _customColor = Colors.teal;
+  String fontFamily = 'Victor_Mono';
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +36,10 @@ class _HomePageState extends State<HomePage> {
               Text(
                 'FANG', // Aquí puedes colocar el título deseado
                 style: TextStyle(
+                  fontFamily: fontFamily,
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
-                  color: _grana, // Color del título
+                  color: _customColor, // Color del título
                 ),
               ),
               SizedBox(height: 200),
@@ -52,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: _grana, // Fondo blanco para el botón
+                    backgroundColor: _customColor, // Fondo blanco para el botón
                     foregroundColor: Colors.white, // Color del texto
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
@@ -70,13 +71,14 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.fitbit, // Aquí puedes cambiar el icono por el que desees
-                          size: 24,
+                          Icons.construction, // Aquí puedes cambiar el icono por el que desees
+                          size: 30,
                         ),
                         SizedBox(width: 10), // Espacio entre el icono y el texto
                         Text(
-                          'En procès',
+                          'Taller',
                           style: TextStyle(
+                            fontFamily: fontFamily,
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
@@ -97,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: _grana, // Fondo blanco para el botón
+                    backgroundColor: _customColor, // Fondo blanco para el botón
                     foregroundColor: Colors.white, // Color del texto
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
@@ -116,12 +118,13 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Icon(
                           Icons.photo_library, // Aquí puedes cambiar el icono por el que desees
-                          size: 24,
+                          size: 30,
                         ),
                         SizedBox(width: 10), // Espacio entre el icono y el texto
                         Text(
                           'Galeria',
                           style: TextStyle(
+                            fontFamily: fontFamily,
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
@@ -138,4 +141,5 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
 }
