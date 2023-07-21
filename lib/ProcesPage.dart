@@ -724,13 +724,13 @@ class _ProcesPageState extends State<ProcesPage> {
           ),
           actions: [
             TextButton(
-              child: const Text('Cancelar'),
+              child: const Text('Cancelar', style: TextStyle(color: customColor)),
               onPressed: () {
                 Navigator.of(context).pop(false); // No se eliminará
               },
             ),
             TextButton(
-              child: const Text('Eliminar'),
+              child: const Text('Eliminar', style: TextStyle(color: Colors.redAccent),),
               onPressed: () {
                 Navigator.of(context).pop(true); // Se eliminará
               },
@@ -795,7 +795,7 @@ class _ProcesPageState extends State<ProcesPage> {
                   onTap: () => _update(documentSnapshot),
                   child: Card(
                     margin: const EdgeInsets.all(10),
-                    color: allFieldsFilled ? Colors.green[100] : null,
+                    color: allFieldsFilled ? Colors.teal.shade100 : null,
                     child: ListTile(
                       title: Text(documentSnapshot['nom']),
                       subtitle: Text(documentSnapshot['id']),

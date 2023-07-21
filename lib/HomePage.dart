@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                     foregroundColor: Colors.white, // Color del texto
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
-                        20,
+                        15,
                       ), // Ajusta la curvatura de las esquinas
                     ),
                     padding: const EdgeInsets.symmetric(
@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                     foregroundColor: Colors.white, // Color del texto
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
-                        20,
+                        15,
                       ), // Ajusta la curvatura de las esquinas
                     ),
                     padding: const EdgeInsets.symmetric(

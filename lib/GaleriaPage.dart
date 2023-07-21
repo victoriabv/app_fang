@@ -35,6 +35,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
     _observacionsController.clear();
 
     String? _imageUrl;
+    String? _previousImageUrl;
     bool imageSelected = false;
 
     await showModalBottomSheet(
@@ -144,41 +145,75 @@ class _GaleriaPageState extends State<GaleriaPage> {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            return SimpleDialog(
+                            return AlertDialog(
                               title: Text('Afegeix una imatge'),
-                              children: [
-                                ListTile(
-                                  leading: Icon(Icons.photo),
-                                  title: Text('Galeria'),
-                                  onTap: () async {
-                                    ImageMethods imageMetods = ImageMethods();
-                                    String imageUrl =
-                                    await imageMetods.imageGallery();
-                                    setState(() {
-                                      _imageUrl = imageUrl;
-                                      imageSelected = true;
-                                    });
-                                    Navigator.pop(context);
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ListTile(
+                                    leading: Icon(Icons.photo),
+                                    title: Text('Galeria'),
+                                    onTap: () async {
+                                      ImageMethods imageMetods = ImageMethods();
+                                      String imageUrl =
+                                      await imageMetods.imageGallery();
+                                      setState(() {
+                                        _imageUrl = imageUrl;
+                                        imageSelected = true;
+                                      });
+                                      //Navigator.pop(context);
+                                    },
+                                  ),
+                                  ListTile(
+                                    leading: Icon(Icons.camera_alt),
+                                    title: Text('Càmera'),
+                                    onTap: () async {
+                                      ImageMethods imageMetods = ImageMethods();
+                                      String imageUrl =
+                                      await imageMetods.imageCamera();
+                                      setState(() {
+                                        _imageUrl = imageUrl;
+                                        imageSelected = true;
+                                      });
+                                      //Navigator.pop(context);
+                                    },
+                                  ),
+                                ],
+                              ),
+                              actions: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Acción cuando se pulsa "Aceptar"
+                                    Navigator.pop(context, true); // Aceptar
                                   },
+                                  child: Text('Aceptar'),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: customColor,
+                                  ),
                                 ),
-                                ListTile(
-                                  leading: Icon(Icons.camera_alt),
-                                  title: Text('Càmera'),
-                                  onTap: () async {
-                                    ImageMethods imageMetods = ImageMethods();
-                                    String imageUrl =
-                                    await imageMetods.imageCamera();
-                                    setState(() {
-                                      _imageUrl = imageUrl;
-                                      imageSelected = true;
-                                    });
-                                    Navigator.pop(context);
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Acción cuando se pulsa "Cancelar"
+                                    Navigator.pop(context, false); // Cancelar
                                   },
+                                  child: Text('Cancelar'),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.grey,
+                                  ),
                                 ),
                               ],
                             );
                           },
-                        );
+                        ).then((value) {
+                          if (value != null && !value) {
+                            // Si el usuario seleccionó "Cancelar",
+                            // restauramos la imagen anterior.
+                            setState(() {
+                              _imageUrl = _previousImageUrl;
+                              imageSelected = false;
+                            });
+                          }
+                        });
                       },
                       child: Container(
                         width: 40.0,
@@ -204,16 +239,6 @@ class _GaleriaPageState extends State<GaleriaPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        ElevatedButton(
-                          child: const Text('Cancelar'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey,
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                        const SizedBox(width: 10),
                         ElevatedButton(
                           child: const Text('Aceptar'),
                           style: ElevatedButton.styleFrom(
@@ -352,6 +377,16 @@ class _GaleriaPageState extends State<GaleriaPage> {
                                 },
                               );
                             }
+                          },
+                        ),
+                        const SizedBox(width: 10),
+                        ElevatedButton(
+                          child: const Text('Cancelar'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.grey,
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
                           },
                         ),
                       ],
@@ -535,6 +570,9 @@ class _GaleriaPageState extends State<GaleriaPage> {
                                     Navigator.pop(context);
                                   },
                                   child: Text('Aceptar'),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: customColor,
+                                  ),
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
@@ -548,6 +586,9 @@ class _GaleriaPageState extends State<GaleriaPage> {
                                     Navigator.pop(context);
                                   },
                                   child: Text('Cancelar'),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.grey,
+                                  ),
                                 ),
                               ],
                             );
@@ -578,16 +619,6 @@ class _GaleriaPageState extends State<GaleriaPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        ElevatedButton(
-                          child: const Text('Cancelar'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey,
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                        const SizedBox(width: 10),
                         ElevatedButton(
                           child: const Text('Aceptar'),
                           style: ElevatedButton.styleFrom(
@@ -625,6 +656,16 @@ class _GaleriaPageState extends State<GaleriaPage> {
                                 print("Error updating document: $error"));
                           },
                         ),
+                        const SizedBox(width: 10),
+                        ElevatedButton(
+                          child: const Text('Cancelar'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.grey,
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
                       ],
                     ),
                   ],
@@ -644,7 +685,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Confirmar'),
+          title: const Text('Eliminar peça'),
           content: Row(
             children: [
               Icon(
@@ -653,19 +694,19 @@ class _GaleriaPageState extends State<GaleriaPage> {
               ),
               const SizedBox(width: 16),
               Expanded(
-                child: Text('Segur que vols eliminar aquest registre?'),
+                child: Text('Segur que vols eliminar aquesta peça?'),
               ),
             ],
           ),
           actions: [
             TextButton(
-              child: const Text('Cancelar'),
+              child: const Text('Cancelar', style: TextStyle(color: customColor)),
               onPressed: () {
                 Navigator.of(context).pop(false); // No se eliminará
               },
             ),
             TextButton(
-              child: const Text('Eliminar'),
+              child: const Text('Eliminar', style: TextStyle(color: Colors.redAccent),),
               onPressed: () {
                 Navigator.of(context).pop(true); // Se eliminará
               },
@@ -908,7 +949,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
           if (streamSnapshot.hasData) {
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+                crossAxisCount: 3,
               ),
               itemCount: streamSnapshot.data!.docs.length,
               itemBuilder: (context, index) {
@@ -917,7 +958,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
                 return GestureDetector(
                   onTap: () => _showDetails(documentSnapshot),
                   child: Card(
-                    margin: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(7),
                     child: Image.network(
                       documentSnapshot['imageUrl'],
                       fit: BoxFit.cover,
