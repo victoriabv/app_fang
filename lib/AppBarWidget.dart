@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'constants.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final Color backgroundColor;
@@ -27,6 +28,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
             child: Text(
               'FANG',
               style: TextStyle(
+                fontFamily: fontFamily,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
@@ -37,6 +39,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
             child: Text(
               subtitle,
               style: TextStyle(
+                fontFamily: fontFamily,
                 color: Colors.white,
                 fontSize: 14,
               ),
@@ -44,7 +47,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
-      backgroundColor: Colors.teal,
+      backgroundColor: customColor,
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Image.asset('assets/img/logo_blanc.png'),

@@ -2,6 +2,7 @@ import 'package:fang/GaleriaPage.dart';
 import 'package:fang/ProcesPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'constants.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,8 +14,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // Color personalizado: #801c24
   //Color _grana = Color.fromARGB(0xFF, 0x6C, 0x1C, 0x24);
-  Color _customColor = Colors.teal;
-  String fontFamily = 'Victor_Mono';
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +38,12 @@ class _HomePageState extends State<HomePage> {
                   fontFamily: fontFamily,
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
-                  color: _customColor, // Color del título
+                  color: customColor, // Color del título
                 ),
               ),
               SizedBox(height: 200),
               Container(
-                width: MediaQuery.of(context).size.width * 0.7, // Ajusta el valor para modificar el tamaño del botón
+                width: MediaQuery.of(context).size.width * 0.9, // Ajusta el valor para modificar el tamaño del botón
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -53,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: _customColor, // Fondo blanco para el botón
+                    backgroundColor: customColor, // Fondo blanco para el botón
                     foregroundColor: Colors.white, // Color del texto
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
@@ -90,7 +89,7 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: 20),
               Container(
-                width: MediaQuery.of(context).size.width * 0.7, // Ajusta el valor para modificar el tamaño del botón
+                width: MediaQuery.of(context).size.width * 0.9, // Ajusta el valor para modificar el tamaño del botón
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -99,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: _customColor, // Fondo blanco para el botón
+                    backgroundColor: customColor, // Fondo blanco para el botón
                     foregroundColor: Colors.white, // Color del texto
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(

@@ -1,4 +1,5 @@
 import 'package:fang/AppBarWidget.dart';
+import 'package:fang/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +13,6 @@ class ProcesPage extends StatefulWidget {
 }
 
 //Color _grana = Color.fromARGB(0xFF, 0x6C, 0x1C, 0x24);
-Color _customColor = Colors.teal;
 
 class _ProcesPageState extends State<ProcesPage> {
   final TextEditingController _idController = TextEditingController();
@@ -75,12 +75,12 @@ class _ProcesPageState extends State<ProcesPage> {
                         labelStyle: TextStyle(
                           fontSize: 22, // Tamaño de fuente deseado
                           fontWeight: FontWeight.bold, // Peso de fuente deseado
-                          color: _customColor, // Color de fuente deseado
+                          color: customColor, // Color de fuente deseado
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                               color:
-                                  _customColor), // Cambia el color de resaltado a gris
+                                  customColor), // Cambia el color de resaltado a gris
                         ),
                       ),
                     ),
@@ -91,12 +91,12 @@ class _ProcesPageState extends State<ProcesPage> {
                         labelStyle: TextStyle(
                           fontSize: 22, // Tamaño de fuente deseado
                           fontWeight: FontWeight.bold, // Peso de fuente deseado
-                          color: _customColor, // Color de fuente deseado
+                          color: customColor, // Color de fuente deseado
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                               color:
-                                  _customColor), // Cambia el color de resaltado a gris
+                                  customColor), // Cambia el color de resaltado a gris
                         ),
                       ),
                     ),
@@ -108,7 +108,7 @@ class _ProcesPageState extends State<ProcesPage> {
                             fontSize: 18, // Tamaño de fuente deseado
                             fontWeight:
                                 FontWeight.bold, // Peso de fuente deseado
-                            color: _customColor, // Color de fuente deseado
+                            color: customColor, // Color de fuente deseado
                           ),
                         ),
                         Switch(
@@ -129,7 +129,7 @@ class _ProcesPageState extends State<ProcesPage> {
                             fontSize: 18, // Tamaño de fuente deseado
                             fontWeight:
                                 FontWeight.bold, // Peso de fuente deseado
-                            color: _customColor, // Color de fuente deseado
+                            color: customColor, // Color de fuente deseado
                           ),
                         ),
                         Switch(
@@ -150,7 +150,7 @@ class _ProcesPageState extends State<ProcesPage> {
                             fontSize: 18, // Tamaño de fuente deseado
                             fontWeight:
                                 FontWeight.bold, // Peso de fuente deseado
-                            color: _customColor, // Color de fuente deseado
+                            color: customColor, // Color de fuente deseado
                           ),
                         ),
                         Switch(
@@ -171,7 +171,7 @@ class _ProcesPageState extends State<ProcesPage> {
                             fontSize: 18, // Tamaño de fuente deseado
                             fontWeight:
                                 FontWeight.bold, // Peso de fuente deseado
-                            color: _customColor, // Color de fuente deseado
+                            color: customColor, // Color de fuente deseado
                           ),
                         ),
                         Switch(
@@ -193,10 +193,10 @@ class _ProcesPageState extends State<ProcesPage> {
                         labelStyle: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: _customColor,
+                          color: customColor,
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: _customColor),
+                          borderSide: BorderSide(color: customColor),
                         ),
                       ),
                       items: ['Fang marró', 'Fang vermell', 'Gres', 'Fake gres']
@@ -218,12 +218,12 @@ class _ProcesPageState extends State<ProcesPage> {
                         labelStyle: TextStyle(
                           fontSize: 22, // Tamaño de fuente deseado
                           fontWeight: FontWeight.bold, // Peso de fuente deseado
-                          color: _customColor, // Color de fuente deseado
+                          color: customColor, // Color de fuente deseado
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                               color:
-                                  _customColor), // Cambia el color de resaltado a gris
+                                  customColor), // Cambia el color de resaltado a gris
                         ),
                       ),
                     ),
@@ -234,12 +234,12 @@ class _ProcesPageState extends State<ProcesPage> {
                         labelStyle: TextStyle(
                           fontSize: 22, // Tamaño de fuente deseado
                           fontWeight: FontWeight.bold, // Peso de fuente deseado
-                          color: _customColor, // Color de fuente deseado
+                          color: customColor, // Color de fuente deseado
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                               color:
-                                  _customColor), // Cambia el color de resaltado a gris
+                                  customColor), // Cambia el color de resaltado a gris
                         ),
                       ),
                     ),
@@ -247,7 +247,7 @@ class _ProcesPageState extends State<ProcesPage> {
                     ElevatedButton(
                       child: const Text('Crear'),
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: _customColor, // background (button) color
+                          backgroundColor: customColor, // background (button) color
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.all(10)),
                       onPressed: () async {
@@ -380,12 +380,12 @@ class _ProcesPageState extends State<ProcesPage> {
                         labelStyle: TextStyle(
                           fontSize: 22, // Tamaño de fuente deseado
                           fontWeight: FontWeight.bold, // Peso de fuente deseado
-                          color: _customColor, // Color de fuente deseado
+                          color: customColor, // Color de fuente deseado
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                               color:
-                              _customColor), // Cambia el color de resaltado a gris
+                              customColor), // Cambia el color de resaltado a gris
                         ),
                       ),
                     ),
@@ -396,12 +396,12 @@ class _ProcesPageState extends State<ProcesPage> {
                         labelStyle: TextStyle(
                           fontSize: 22, // Tamaño de fuente deseado
                           fontWeight: FontWeight.bold, // Peso de fuente deseado
-                          color: _customColor, // Color de fuente deseado
+                          color: customColor, // Color de fuente deseado
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                               color:
-                              _customColor), // Cambia el color de resaltado a gris
+                              customColor), // Cambia el color de resaltado a gris
                         ),
                       ),
                     ),
@@ -413,7 +413,7 @@ class _ProcesPageState extends State<ProcesPage> {
                             fontSize: 18, // Tamaño de fuente deseado
                             fontWeight:
                             FontWeight.bold, // Peso de fuente deseado
-                            color: _customColor, // Color de fuente deseado
+                            color: customColor, // Color de fuente deseado
                           ),
                         ),
                         Switch(
@@ -434,7 +434,7 @@ class _ProcesPageState extends State<ProcesPage> {
                             fontSize: 18, // Tamaño de fuente deseado
                             fontWeight:
                             FontWeight.bold, // Peso de fuente deseado
-                            color: _customColor, // Color de fuente deseado
+                            color: customColor, // Color de fuente deseado
                           ),
                         ),
                         Switch(
@@ -455,7 +455,7 @@ class _ProcesPageState extends State<ProcesPage> {
                             fontSize: 18, // Tamaño de fuente deseado
                             fontWeight:
                             FontWeight.bold, // Peso de fuente deseado
-                            color: _customColor, // Color de fuente deseado
+                            color: customColor, // Color de fuente deseado
                           ),
                         ),
                         Switch(
@@ -476,7 +476,7 @@ class _ProcesPageState extends State<ProcesPage> {
                             fontSize: 18, // Tamaño de fuente deseado
                             fontWeight:
                             FontWeight.bold, // Peso de fuente deseado
-                            color: _customColor, // Color de fuente deseado
+                            color: customColor, // Color de fuente deseado
                           ),
                         ),
                         Switch(
@@ -498,10 +498,10 @@ class _ProcesPageState extends State<ProcesPage> {
                         labelStyle: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: _customColor,
+                          color: customColor,
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: _customColor),
+                          borderSide: BorderSide(color: customColor),
                         ),
                       ),
                       items: ['Fang marró', 'Fang vermell', 'Gres', 'Fake gres']
@@ -523,12 +523,12 @@ class _ProcesPageState extends State<ProcesPage> {
                         labelStyle: TextStyle(
                           fontSize: 22, // Tamaño de fuente deseado
                           fontWeight: FontWeight.bold, // Peso de fuente deseado
-                          color: _customColor, // Color de fuente deseado
+                          color: customColor, // Color de fuente deseado
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                               color:
-                              _customColor), // Cambia el color de resaltado a gris
+                              customColor), // Cambia el color de resaltado a gris
                         ),
                       ),
                     ),
@@ -539,12 +539,12 @@ class _ProcesPageState extends State<ProcesPage> {
                         labelStyle: TextStyle(
                           fontSize: 22, // Tamaño de fuente deseado
                           fontWeight: FontWeight.bold, // Peso de fuente deseado
-                          color: _customColor, // Color de fuente deseado
+                          color: customColor, // Color de fuente deseado
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                               color:
-                              _customColor), // Cambia el color de resaltado a gris
+                              customColor), // Cambia el color de resaltado a gris
                         ),
                       ),
                     ),
@@ -563,7 +563,7 @@ class _ProcesPageState extends State<ProcesPage> {
                             ),
                             style: ButtonStyle(
                               backgroundColor:
-                                  MaterialStateProperty.all<Color>(_customColor),
+                                  MaterialStateProperty.all<Color>(customColor),
                             ),
                             onPressed: () async {
                               final String id = _idController.text;
@@ -618,7 +618,7 @@ class _ProcesPageState extends State<ProcesPage> {
                               ),
                               style: ButtonStyle(
                                 backgroundColor:
-                                    MaterialStateProperty.all<Color>(_customColor),
+                                    MaterialStateProperty.all<Color>(customColor),
                               ),
                               onPressed: () async {
                                 showDialog(
@@ -752,8 +752,8 @@ class _ProcesPageState extends State<ProcesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
-        backgroundColor: _customColor,
-        subtitle: 'En procès',
+        backgroundColor: customColor,
+        subtitle: 'Taller',
         onExit: () {
           SystemChannels.platform.invokeMethod('SystemNavigator.pop');
         },
@@ -833,7 +833,7 @@ class _ProcesPageState extends State<ProcesPage> {
         child: FloatingActionButton(
           onPressed: () => _create(),
           child: const Icon(Icons.add),
-          backgroundColor: _customColor,
+          backgroundColor: customColor,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
