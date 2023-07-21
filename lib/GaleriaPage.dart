@@ -815,28 +815,33 @@ class _GaleriaPageState extends State<GaleriaPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            IconButton(
-                              icon: const Icon(Icons.edit),
-                              color: Colors.teal.shade800,
+                            FloatingActionButton(
                               onPressed: () {
                                 Navigator.of(ctx).pop();
                                 _update(currentSnapshot);
                               },
+                              backgroundColor: Colors.teal.shade800,
+                              mini: true, // Establecer el botón como más pequeño
+                              child: const Icon(Icons.edit),
                             ),
-                            IconButton(
-                              icon: const Icon(Icons.delete),
-                              color: Colors.teal.shade800,
+                            SizedBox(width: 0.8), // Espacio entre los botones
+                            FloatingActionButton(
                               onPressed: () {
                                 Navigator.of(ctx).pop();
                                 _delete(currentSnapshot.id);
                               },
+                              backgroundColor: Colors.teal.shade800,
+                              mini: true, // Establecer el botón como más pequeño
+                              child: const Icon(Icons.delete),
                             ),
-                            IconButton(
-                              icon: const Icon(Icons.close),
-                              color: Colors.teal.shade800,
+                            SizedBox(width: 0.8), // Espacio entre los botones
+                            FloatingActionButton(
                               onPressed: () {
                                 Navigator.of(ctx).pop();
                               },
+                              backgroundColor: Colors.teal.shade800,
+                              mini: true, // Establecer el botón como más pequeño
+                              child: const Icon(Icons.close),
                             ),
                           ],
                         ),
@@ -896,10 +901,13 @@ class _GaleriaPageState extends State<GaleriaPage> {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _create(),
-        child: const Icon(Icons.add),
-        backgroundColor: _customColor,
+      floatingActionButton: Transform.scale(
+        scale: 1.3, // Ajusta el valor según el tamaño deseado (1.0 es el tamaño original)
+        child: FloatingActionButton(
+          onPressed: () => _create(),
+          child: const Icon(Icons.add),
+          backgroundColor: _customColor,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

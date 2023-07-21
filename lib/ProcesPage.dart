@@ -828,10 +828,13 @@ class _ProcesPageState extends State<ProcesPage> {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _create(),
-        child: const Icon(Icons.add),
-        backgroundColor: _customColor,
+      floatingActionButton: Transform.scale(
+        scale: 1.3, // Ajusta el valor según el tamaño deseado (1.0 es el tamaño original)
+        child: FloatingActionButton(
+          onPressed: () => _create(),
+          child: const Icon(Icons.add),
+          backgroundColor: _customColor,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
