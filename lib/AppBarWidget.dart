@@ -50,7 +50,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: customColor,
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Image.asset('assets/img/logo_blanc.png'),
+        child: Image.asset('assets/img/logo_potter_blanc.png'),
       ),
       actions: [
         IconButton(

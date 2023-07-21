@@ -865,7 +865,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
     return Scaffold(
       appBar: AppBarWidget(
         backgroundColor: customColor,
-        subtitle: 'Galeria',
+        subtitle: 'Peces',
         onExit: () {
           SystemChannels.platform.invokeMethod('SystemNavigator.pop');
         },

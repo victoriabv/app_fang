@@ -28,9 +28,9 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.asset(
-                "assets/img/logo_teal.png",
-                width: 50, // Ajusta el valor para modificar el ancho de la imagen
-                height: 50, // Ajusta el valor para modificar la altura de la imagen
+                "assets/img/logo_potter_teal.png",
+                width: 60, // Ajusta el valor para modificar el ancho de la imagen
+                height: 60, // Ajusta el valor para modificar la altura de la imagen
               ),
               SizedBox(height: 20), // Espacio entre la imagen y el título
               Text(
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(PotterIcons.potter_icon_1, size: 40),
+                        Icon(PotterIcons.potter_icon_10, size: 40),
                         SizedBox(width: 10), // Espacio entre el icono y el texto
                         Text(
                           'Taller',

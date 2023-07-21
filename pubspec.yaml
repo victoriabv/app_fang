@@ -72,6 +72,8 @@ flutter:
      - assets/img/logo_blanc.png
      - assets/img/logo_grana.png
      - assets/img/logo_teal.png
+     - assets/img/logo_potter_blanc.png
+     - assets/img/logo_potter_teal.png
   #   - assets/img/logo_teal_blanc.png
   #   - images/a_dot_ham.jpeg
 
