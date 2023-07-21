@@ -491,36 +491,63 @@ class _GaleriaPageState extends State<GaleriaPage> {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            return SimpleDialog(
+                            return AlertDialog(
                               title: Text('Afegeix una imatge'),
-                              children: [
-                                ListTile(
-                                  leading: Icon(Icons.photo),
-                                  title: Text('Galeria'),
-                                  onTap: () async {
-                                    ImageMethods imageMetods = ImageMethods();
-                                    String imageUrl =
-                                    await imageMetods.imageGallery();
-                                    setState(() {
-                                      _imageUrl = imageUrl;
-                                      imageSelected = true;
-                                    });
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ListTile(
+                                    leading: Icon(Icons.photo),
+                                    title: Text('Galeria'),
+                                    onTap: () async {
+                                      ImageMethods imageMethods = ImageMethods();
+                                      String imageUrl = await imageMethods.imageGallery();
+                                      if (imageUrl != null) {
+                                        setState(() {
+                                          _imageUrl = imageUrl;
+                                          imageSelected = true;
+                                        });
+                                      }
+                                      //Navigator.pop(context);
+                                    },
+                                  ),
+                                  ListTile(
+                                    leading: Icon(Icons.camera_alt),
+                                    title: Text('Càmera'),
+                                    onTap: () async {
+                                      ImageMethods imageMethods = ImageMethods();
+                                      String imageUrl = await imageMethods.imageCamera();
+                                      if (imageUrl != null) {
+                                        setState(() {
+                                          _imageUrl = imageUrl;
+                                          imageSelected = true;
+                                        });
+                                      }
+                                      //Navigator.pop(context);
+                                    },
+                                  ),
+                                ],
+                              ),
+                              actions: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Acción cuando se pulsa "Aceptar"
                                     Navigator.pop(context);
                                   },
+                                  child: Text('Aceptar'),
                                 ),
-                                ListTile(
-                                  leading: Icon(Icons.camera_alt),
-                                  title: Text('Càmera'),
-                                  onTap: () async {
-                                    ImageMethods imageMetods = ImageMethods();
-                                    String imageUrl =
-                                    await imageMetods.imageCamera();
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Acción cuando se pulsa "Cancelar"
+                                    // Aquí puedes deshacer los cambios realizados
+                                    // en caso de que se haya seleccionado una imagen.
                                     setState(() {
-                                      _imageUrl = imageUrl;
-                                      imageSelected = true;
+                                      _imageUrl = documentSnapshot?['imageUrl'];
+                                      imageSelected = false;
                                     });
                                     Navigator.pop(context);
                                   },
+                                  child: Text('Cancelar'),
                                 ),
                               ],
                             );
@@ -573,7 +600,9 @@ class _GaleriaPageState extends State<GaleriaPage> {
                             final String esmalts = _esmaltsController.text;
                             final String observacions =
                                 _observacionsController.text;
-                            await _galeria.doc(documentSnapshot!.id).update({
+                            await _galeria
+                                .doc(documentSnapshot!.id)
+                                .update({
                               "id": id,
                               "nom": nom,
                               "fang": fang,
@@ -582,7 +611,8 @@ class _GaleriaPageState extends State<GaleriaPage> {
                               "imageUrl": imageSelected
                                   ? _imageUrl
                                   : documentSnapshot['imageUrl'],
-                            }).then((_) {
+                            })
+                                .then((_) {
                               _idController.text = '';
                               _nomController.text = '';
                               _fangController.text = '';
@@ -590,7 +620,8 @@ class _GaleriaPageState extends State<GaleriaPage> {
                               _observacionsController.text = '';
                               Navigator.of(context).pop();
                               _showDetails(documentSnapshot);
-                            }).catchError((error) =>
+                            })
+                                .catchError((error) =>
                                 print("Error updating document: $error"));
                           },
                         ),
@@ -605,6 +636,7 @@ class _GaleriaPageState extends State<GaleriaPage> {
       },
     );
   }
+
 
 
   Future<void> _delete(String id) async {
