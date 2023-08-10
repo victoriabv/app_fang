@@ -639,10 +639,29 @@ class _ProcesPageState extends State<ProcesPage> {
                                             onTap: () async {
                                               ImageMethods imageMethods = ImageMethods();
                                               String imageUrl = await imageMethods.imageGallery();
+                                              showDialog(
+                                                context: context,
+                                                builder: (BuildContext context) {
+                                                  return AlertDialog(
+                                                    content: Column(
+                                                      mainAxisSize: MainAxisSize.min,
+                                                      children: [
+                                                        CircularProgressIndicator(), // Mostrar el indicador de carga
+                                                        SizedBox(height: 10),
+                                                        Text('Carregant imatge...'),
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
+                                              );
                                                 setState(() {
                                                   _imageUrl = imageUrl;
                                                   imageSelected = true;
                                                 });
+                                              Future.delayed(Duration(seconds: 3), () {
+                                                Navigator.of(context).pop(); // Cerrar el diálogo de carga
+                                                // Resto del código para continuar
+                                              });
                                               //Navigator.pop(context);
                                             },
                                           ),
@@ -656,6 +675,29 @@ class _ProcesPageState extends State<ProcesPage> {
                                                   _imageUrl = imageUrl;
                                                   imageSelected = true;
                                                 });
+                                              showDialog(
+                                                context: context,
+                                                builder: (BuildContext context) {
+                                                  return AlertDialog(
+                                                    content: Column(
+                                                      mainAxisSize: MainAxisSize.min,
+                                                      children: [
+                                                        CircularProgressIndicator(), // Mostrar el indicador de carga
+                                                        SizedBox(height: 10),
+                                                        Text('Carregant imatge...'),
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                              setState(() {
+                                                _imageUrl = imageUrl;
+                                                imageSelected = true;
+                                              });
+                                              Future.delayed(Duration(seconds: 3), () {
+                                                Navigator.of(context).pop(); // Cerrar el diálogo de carga
+                                                // Resto del código para continuar
+                                              });
                                               //Navigator.pop(context);
                                             },
                                           ),
