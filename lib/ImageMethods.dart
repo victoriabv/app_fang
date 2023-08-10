@@ -4,7 +4,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class ImageMethods {
-
   Future<String> imageGallery([DocumentSnapshot? documentSnapshot]) async {
     final picker = ImagePicker();
     final pickedImage = await picker.getImage(source: ImageSource.gallery);
@@ -15,7 +14,7 @@ class ImageMethods {
 
     File imageFile = File(pickedImage.path);
 
-    Future<String> imageUrl = imageUpload(imageFile);
+    String imageUrl = await imageUpload(imageFile);
 
     return imageUrl;
   }
@@ -30,13 +29,12 @@ class ImageMethods {
 
     File imageFile = File(pickedImage.path);
 
-    Future<String> imageUrl = imageUpload(imageFile);
+    String imageUrl = await imageUpload(imageFile);
 
     return imageUrl;
   }
 
-
-  Future<String> imageUpload(File imageFile) async{
+  Future<String> imageUpload(File imageFile) async {
     firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
         .ref()
         .child('images/${DateTime.now().millisecondsSinceEpoch}');
@@ -47,6 +45,4 @@ class ImageMethods {
 
     return imageUrl;
   }
-
 }
-

@@ -247,7 +247,8 @@ class _ProcesPageState extends State<ProcesPage> {
                     ElevatedButton(
                       child: const Text('Crear'),
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: customColor, // background (button) color
+                          backgroundColor:
+                              customColor, // background (button) color
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.all(10)),
                       onPressed: () async {
@@ -352,6 +353,9 @@ class _ProcesPageState extends State<ProcesPage> {
       _observacionsController.text = documentSnapshot['observacions'];
     }
 
+    bool imageSelected = false;
+    String? _imageUrl;
+
     await showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -385,7 +389,7 @@ class _ProcesPageState extends State<ProcesPage> {
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                               color:
-                              customColor), // Cambia el color de resaltado a gris
+                                  customColor), // Cambia el color de resaltado a gris
                         ),
                       ),
                     ),
@@ -401,7 +405,7 @@ class _ProcesPageState extends State<ProcesPage> {
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                               color:
-                              customColor), // Cambia el color de resaltado a gris
+                                  customColor), // Cambia el color de resaltado a gris
                         ),
                       ),
                     ),
@@ -412,7 +416,7 @@ class _ProcesPageState extends State<ProcesPage> {
                           style: TextStyle(
                             fontSize: 18, // Tamaño de fuente deseado
                             fontWeight:
-                            FontWeight.bold, // Peso de fuente deseado
+                                FontWeight.bold, // Peso de fuente deseado
                             color: customColor, // Color de fuente deseado
                           ),
                         ),
@@ -433,7 +437,7 @@ class _ProcesPageState extends State<ProcesPage> {
                           style: TextStyle(
                             fontSize: 18, // Tamaño de fuente deseado
                             fontWeight:
-                            FontWeight.bold, // Peso de fuente deseado
+                                FontWeight.bold, // Peso de fuente deseado
                             color: customColor, // Color de fuente deseado
                           ),
                         ),
@@ -454,7 +458,7 @@ class _ProcesPageState extends State<ProcesPage> {
                           style: TextStyle(
                             fontSize: 18, // Tamaño de fuente deseado
                             fontWeight:
-                            FontWeight.bold, // Peso de fuente deseado
+                                FontWeight.bold, // Peso de fuente deseado
                             color: customColor, // Color de fuente deseado
                           ),
                         ),
@@ -475,7 +479,7 @@ class _ProcesPageState extends State<ProcesPage> {
                           style: TextStyle(
                             fontSize: 18, // Tamaño de fuente deseado
                             fontWeight:
-                            FontWeight.bold, // Peso de fuente deseado
+                                FontWeight.bold, // Peso de fuente deseado
                             color: customColor, // Color de fuente deseado
                           ),
                         ),
@@ -506,9 +510,9 @@ class _ProcesPageState extends State<ProcesPage> {
                       ),
                       items: ['Fang marró', 'Fang vermell', 'Gres', 'Fake gres']
                           .map((String value) => DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      ))
+                                value: value,
+                                child: Text(value),
+                              ))
                           .toList(),
                       onChanged: (String? newValue) {
                         setState(() {
@@ -528,7 +532,7 @@ class _ProcesPageState extends State<ProcesPage> {
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                               color:
-                              customColor), // Cambia el color de resaltado a gris
+                                  customColor), // Cambia el color de resaltado a gris
                         ),
                       ),
                     ),
@@ -544,7 +548,7 @@ class _ProcesPageState extends State<ProcesPage> {
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                               color:
-                              customColor), // Cambia el color de resaltado a gris
+                                  customColor), // Cambia el color de resaltado a gris
                         ),
                       ),
                     ),
@@ -557,7 +561,9 @@ class _ProcesPageState extends State<ProcesPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(Icons.save), // Icono de guardado
-                                const SizedBox(width: 5), // Espacio entre el icono y el texto
+                                const SizedBox(
+                                    width:
+                                        5), // Espacio entre el icono y el texto
                                 const Text('Guardar'), // Texto del botón
                               ],
                             ),
@@ -576,31 +582,31 @@ class _ProcesPageState extends State<ProcesPage> {
                               final String esmalts = _esmaltsController.text;
                               final String observacions =
                                   _observacionsController.text;
-                                await _proces.doc(documentSnapshot!.id).update({
-                                  "id": id,
-                                  "nom": nom,
-                                  "fregar": fregar,
-                                  "coure_1": coure1,
-                                  "esmaltar": esmaltar,
-                                  "coure_2": coure2,
-                                  "fang": fang,
-                                  "esmalts": esmalts,
-                                  "observacions": observacions
-                                });
-                                _idController.clear();
-                                _nomController.clear();
-                                _fregar = false;
-                                _fregarController.text = _fregar.toString();
-                                _coure1 = false;
-                                _coure1Controller.text = _coure1.toString();
-                                _esmaltar = false;
-                                _esmaltarController.text = _coure1.toString();
-                                _coure2 = false;
-                                _coure2Controller.text = _coure1.toString();
-                                _fangController.clear();
-                                _esmaltsController.clear();
-                                _observacionsController.clear();
-                                Navigator.of(context).pop();
+                              await _proces.doc(documentSnapshot!.id).update({
+                                "id": id,
+                                "nom": nom,
+                                "fregar": fregar,
+                                "coure_1": coure1,
+                                "esmaltar": esmaltar,
+                                "coure_2": coure2,
+                                "fang": fang,
+                                "esmalts": esmalts,
+                                "observacions": observacions
+                              });
+                              _idController.clear();
+                              _nomController.clear();
+                              _fregar = false;
+                              _fregarController.text = _fregar.toString();
+                              _coure1 = false;
+                              _coure1Controller.text = _coure1.toString();
+                              _esmaltar = false;
+                              _esmaltarController.text = _coure1.toString();
+                              _coure2 = false;
+                              _coure2Controller.text = _coure1.toString();
+                              _fangController.clear();
+                              _esmaltsController.clear();
+                              _observacionsController.clear();
+                              Navigator.of(context).pop();
                             },
                           ),
                         ),
@@ -612,29 +618,67 @@ class _ProcesPageState extends State<ProcesPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(Icons.upload), // Icono de subida
-                                  const SizedBox(width: 5), // Espacio entre el icono y el texto
+                                  const SizedBox(
+                                      width:
+                                          5), // Espacio entre el icono y el texto
                                   const Text('Pujar'), // Texto del botón
                                 ],
                               ),
                               style: ButtonStyle(
                                 backgroundColor:
-                                    MaterialStateProperty.all<Color>(customColor),
+                                    MaterialStateProperty.all<Color>(
+                                        customColor),
                               ),
                               onPressed: () async {
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
-                                    return SimpleDialog(
+                                    return AlertDialog(
                                       title: Text('Afegeix una imatge'),
-                                      children: [
-                                        ListTile(
-                                          leading: Icon(Icons.photo),
-                                          title: Text('Galeria'),
-                                          onTap: () async {
-                                            ImageMethods imageMetods =
-                                                ImageMethods();
-                                            String imageUrl = await imageMetods
-                                                .imageGallery();
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          ListTile(
+                                            leading: Icon(Icons.photo),
+                                            title: Text('Galeria'),
+                                            onTap: () async {
+                                              ImageMethods imageMethods =
+                                                  ImageMethods();
+                                              String imageUrl =
+                                                  await imageMethods
+                                                      .imageGallery();
+                                              if (imageUrl != null) {
+                                                setState(() {
+                                                  _imageUrl = imageUrl;
+                                                  imageSelected = true;
+                                                });
+                                              }
+                                              //Navigator.pop(context);
+                                            },
+                                          ),
+                                          ListTile(
+                                            leading: Icon(Icons.camera_alt),
+                                            title: Text('Càmera'),
+                                            onTap: () async {
+                                              ImageMethods imageMethods =
+                                                  ImageMethods();
+                                              String imageUrl =
+                                                  await imageMethods
+                                                      .imageCamera();
+                                              if (imageUrl != null) {
+                                                setState(() {
+                                                  _imageUrl = imageUrl;
+                                                  imageSelected = true;
+                                                });
+                                              }
+                                              //Navigator.pop(context);
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                      actions: [
+                                        ElevatedButton(
+                                          onPressed: () async {
                                             final String id =
                                                 _idController.text;
                                             final String nom =
@@ -645,45 +689,37 @@ class _ProcesPageState extends State<ProcesPage> {
                                                 _esmaltsController.text;
                                             final String observacions =
                                                 _observacionsController.text;
-                                              await _galeria.add({
-                                                "id": id,
-                                                "nom": nom,
-                                                "fang": fang,
-                                                "esmalts": esmalts,
-                                                "observacions": observacions,
-                                                "imageUrl": imageUrl,
-                                              });
-                                              Navigator.of(context).pop();
+                                            await _galeria.add({
+                                              "id": id,
+                                              "nom": nom,
+                                              "fang": fang,
+                                              "esmalts": esmalts,
+                                              "observacions": observacions,
+                                              "imageUrl": _imageUrl,
+                                            });
+                                            setState(() {
+                                              imageSelected = false;
+                                            });
+                                            Navigator.of(context,
+                                                    rootNavigator: true)
+                                                .pop();
                                           },
+                                          child: Text('Aceptar'),
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: customColor,
+                                          ),
                                         ),
-                                        ListTile(
-                                          leading: Icon(Icons.camera_alt),
-                                          title: Text('Càmera'),
-                                          onTap: () async {
-                                            ImageMethods imageMetods =
-                                                ImageMethods();
-                                            String imageUrl =
-                                                await imageMetods.imageCamera();
-                                            final String id =
-                                                _idController.text;
-                                            final String nom =
-                                                _nomController.text;
-                                            final String fang =
-                                                _fangController.text;
-                                            final String esmalts =
-                                                _esmaltsController.text;
-                                            final String observacions =
-                                                _observacionsController.text;
-                                              await _galeria.add({
-                                                "id": id,
-                                                "nom": nom,
-                                                "fang": fang,
-                                                "esmalts": esmalts,
-                                                "observacions": observacions,
-                                                "imageUrl": imageUrl,
-                                              });
-                                              Navigator.of(context).pop();
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            // Acción cuando se pulsa "Cancelar"
+                                            // Aquí puedes deshacer los cambios realizados
+                                            // en caso de que se haya seleccionado una imagen.
+                                            Navigator.pop(context);
                                           },
+                                          child: Text('Cancelar'),
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.grey,
+                                          ),
                                         ),
                                       ],
                                     );
@@ -724,13 +760,17 @@ class _ProcesPageState extends State<ProcesPage> {
           ),
           actions: [
             TextButton(
-              child: const Text('Cancelar', style: TextStyle(color: customColor)),
+              child:
+                  const Text('Cancelar', style: TextStyle(color: customColor)),
               onPressed: () {
                 Navigator.of(context).pop(false); // No se eliminará
               },
             ),
             TextButton(
-              child: const Text('Eliminar', style: TextStyle(color: Colors.redAccent),),
+              child: const Text(
+                'Eliminar',
+                style: TextStyle(color: Colors.redAccent),
+              ),
               onPressed: () {
                 Navigator.of(context).pop(true); // Se eliminará
               },
@@ -829,7 +869,8 @@ class _ProcesPageState extends State<ProcesPage> {
         },
       ),
       floatingActionButton: Transform.scale(
-        scale: 1.3, // Ajusta el valor según el tamaño deseado (1.0 es el tamaño original)
+        scale:
+            1.3, // Ajusta el valor según el tamaño deseado (1.0 es el tamaño original)
         child: FloatingActionButton(
           onPressed: () => _create(),
           child: const Icon(Icons.add),
@@ -839,6 +880,4 @@ class _ProcesPageState extends State<ProcesPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
-
-
 }
