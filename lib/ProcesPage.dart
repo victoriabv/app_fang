@@ -625,126 +625,7 @@ class _ProcesPageState extends State<ProcesPage> {
                                     MaterialStateProperty.all<Color>(customColor),
                               ),
                               onPressed: () async {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Text('Afegeix una imatge'),
-                                      content: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          ListTile(
-                                            leading: Icon(Icons.photo),
-                                            title: Text('Galeria'),
-                                            onTap: () async {
-                                              ImageMethods imageMethods = ImageMethods();
-                                              String imageUrl = await imageMethods.imageGallery();
-                                              showDialog(
-                                                context: context,
-                                                builder: (BuildContext context) {
-                                                  return AlertDialog(
-                                                    content: Column(
-                                                      mainAxisSize: MainAxisSize.min,
-                                                      children: [
-                                                        CircularProgressIndicator(), // Mostrar el indicador de carga
-                                                        SizedBox(height: 10),
-                                                        Text('Carregant imatge...'),
-                                                      ],
-                                                    ),
-                                                  );
-                                                },
-                                              );
-                                                setState(() {
-                                                  _imageUrl = imageUrl;
-                                                  imageSelected = true;
-                                                });
-                                              Future.delayed(Duration(seconds: 3), () {
-                                                Navigator.of(context).pop(); // Cerrar el diálogo de carga
-                                                // Resto del código para continuar
-                                              });
-                                              //Navigator.pop(context);
-                                            },
-                                          ),
-                                          ListTile(
-                                            leading: Icon(Icons.camera_alt),
-                                            title: Text('Càmera'),
-                                            onTap: () async {
-                                              ImageMethods imageMethods = ImageMethods();
-                                              String imageUrl = await imageMethods.imageCamera();
-                                                setState(() {
-                                                  _imageUrl = imageUrl;
-                                                  imageSelected = true;
-                                                });
-                                              showDialog(
-                                                context: context,
-                                                builder: (BuildContext context) {
-                                                  return AlertDialog(
-                                                    content: Column(
-                                                      mainAxisSize: MainAxisSize.min,
-                                                      children: [
-                                                        CircularProgressIndicator(), // Mostrar el indicador de carga
-                                                        SizedBox(height: 10),
-                                                        Text('Carregant imatge...'),
-                                                      ],
-                                                    ),
-                                                  );
-                                                },
-                                              );
-                                              setState(() {
-                                                _imageUrl = imageUrl;
-                                                imageSelected = true;
-                                              });
-                                              Future.delayed(Duration(seconds: 3), () {
-                                                Navigator.of(context).pop(); // Cerrar el diálogo de carga
-                                                // Resto del código para continuar
-                                              });
-                                              //Navigator.pop(context);
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                      actions: [
-                                        ElevatedButton(
-                                          child: const Text('Aceptar'),
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: customColor,
-                                          ),
-                                          onPressed: () async {
-                                            final String id = _idController.text;
-                                            final String nom = _nomController.text;
-                                            final String fang = _fangController.text;
-                                            final String esmalts = _esmaltsController.text;
-                                            final String observacions =
-                                                _observacionsController.text;
-
-                                              await _galeria.add({
-                                                "id": id,
-                                                "nom": nom,
-                                                "fang": fang,
-                                                "esmalts": esmalts,
-                                                "observacions": observacions,
-                                                "imageUrl": _imageUrl,
-                                              });
-                                              setState(() {
-                                                imageSelected = false;
-                                              });
-                                              await _proces.doc(documentSnapshot!.id).delete();
-                                              Navigator.of(context).pop();
-                                          },
-                                        ),
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: const Text('Cancelar'),
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.grey,
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
+                                _upload(context, documentSnapshot!);
                               },
                             ),
                           ),
@@ -755,6 +636,141 @@ class _ProcesPageState extends State<ProcesPage> {
               );
             },
           ),
+        );
+      },
+    );
+  }
+
+  void _upload (BuildContext context, DocumentSnapshot documentSnapshot) {
+    if (documentSnapshot != null) {
+      _idController.text = documentSnapshot['id'];
+      _nomController.text = documentSnapshot['nom'];
+      _fregar = documentSnapshot['fregar'];
+      _fregarController.text = _fregar.toString();
+      _coure1 = documentSnapshot['coure_1'];
+      _coure1Controller.text = _coure1.toString();
+      _esmaltar = documentSnapshot['esmaltar'];
+      _esmaltarController.text = _esmaltar.toString();
+      _coure2 = documentSnapshot['coure_2'];
+      _coure2Controller.text = _coure2.toString();
+      _fangController.text = documentSnapshot['fang'];
+      _esmaltsController.text = documentSnapshot['esmalts'];
+      _observacionsController.text = documentSnapshot['observacions'];
+    }
+    print('we are in');
+    print (documentSnapshot['id']);
+    bool imageSelected = false;
+    String? _imageUrl;
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Afegeix una imatge'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: Icon(Icons.photo),
+                title: Text('Galeria'),
+                onTap: () async {
+                  ImageMethods imageMethods = ImageMethods();
+                  String imageUrl = await imageMethods.imageGallery();
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CircularProgressIndicator(),
+                            SizedBox(height: 10),
+                            Text('Carregant imatge...'),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                  setState(() {
+                    _imageUrl = imageUrl;
+                    imageSelected = true;
+                  });
+                  Future.delayed(Duration(seconds: 3), () {
+                    Navigator.of(context).pop();
+                    // Resto del código para continuar
+                  });
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.camera_alt),
+                title: Text('Càmera'),
+                onTap: () async {
+                  ImageMethods imageMethods = ImageMethods();
+                  String imageUrl = await imageMethods.imageCamera();
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CircularProgressIndicator(),
+                            SizedBox(height: 10),
+                            Text('Carregant imatge...'),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                  setState(() {
+                    _imageUrl = imageUrl;
+                    imageSelected = true;
+                  });
+                  Future.delayed(Duration(seconds: 3), () {
+                    Navigator.of(context).pop();
+                    // Resto del código para continuar
+                  });
+                },
+              ),
+            ],
+          ),
+          actions: [
+            ElevatedButton(
+              child: const Text('Aceptar'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: customColor,
+              ),
+              onPressed: () async {
+                final String id = _idController.text;
+                final String nom = _nomController.text;
+                final String fang = _fangController.text;
+                final String esmalts = _esmaltsController.text;
+                final String observacions = _observacionsController.text;
+
+                await _galeria.add({
+                  "id": id,
+                  "nom": nom,
+                  "fang": fang,
+                  "esmalts": esmalts,
+                  "observacions": observacions,
+                  "imageUrl": _imageUrl,
+                });
+                setState(() {
+                  imageSelected = false;
+                });
+                await _proces.doc(documentSnapshot!.id).delete();
+                Navigator.of(context).pop();
+              },
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Cancelar'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey,
+              ),
+            ),
+          ],
         );
       },
     );
@@ -863,7 +879,7 @@ class _ProcesPageState extends State<ProcesPage> {
                             if (allFieldsFilled)
                               IconButton(
                                 icon: const Icon(Icons.upload),
-                                onPressed: () => _update(documentSnapshot),
+                                onPressed: () async => _upload(context, documentSnapshot),
                               ),
                             IconButton(
                               icon: const Icon(Icons.delete),
