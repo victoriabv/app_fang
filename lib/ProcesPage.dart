@@ -686,6 +686,7 @@ class _ProcesPageState extends State<ProcesPage> {
                                               setState(() {
                                                 imageSelected = false;
                                               });
+                                              await _proces.doc(documentSnapshot!.id).delete();
                                               Navigator.of(context).pop();
                                           },
                                         ),
