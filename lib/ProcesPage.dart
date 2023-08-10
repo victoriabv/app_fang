@@ -657,8 +657,7 @@ class _ProcesPageState extends State<ProcesPage> {
       _esmaltsController.text = documentSnapshot['esmalts'];
       _observacionsController.text = documentSnapshot['observacions'];
     }
-    print('we are in');
-    print (documentSnapshot['id']);
+
     bool imageSelected = false;
     String? _imageUrl;
     showDialog(
