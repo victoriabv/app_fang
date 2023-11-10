@@ -1,4 +1,5 @@
 import 'package:fang/GaleriaPage.dart';
+import 'package:fang/IdeesPage.dart';
 import 'package:fang/ProcesPage.dart';
 import 'package:fang/potter_icons_icons.dart';
 import 'package:flutter/material.dart';
@@ -42,9 +43,52 @@ class _HomePageState extends State<HomePage> {
                   color: customColor, // Color del título
                 ),
               ),
-              SizedBox(height: 200),
+              SizedBox(height: 90),
               Container(
-                width: MediaQuery.of(context).size.width * 0.9, // Ajusta el valor para modificar el tamaño del botón
+                width: MediaQuery.of(context).size.width * 0.6, // Ajusta el valor para modificar el tamaño del botón
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => IdeesPage()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: customColor, // Fondo blanco para el botón
+                    foregroundColor: Colors.white, // Color del texto
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        15,
+                      ), // Ajusta la curvatura de las esquinas
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 30,
+                    ), // Ajusta el tamaño del botón
+                  ),
+                  child: SingleChildScrollView( // Utilizamos SingleChildScrollView para que el contenido se desplace si es necesario
+                    scrollDirection: Axis.horizontal, // Desplazamiento horizontal para el Row
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.lightbulb, size: 40),
+                        SizedBox(width: 10), // Espacio entre el icono y el texto
+                        Text(
+                          'Idees',
+                          style: TextStyle(
+                            fontFamily: fontFamily,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.6, // Ajusta el valor para modificar el tamaño del botón
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -87,7 +131,7 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: 20),
               Container(
-                width: MediaQuery.of(context).size.width * 0.9, // Ajusta el valor para modificar el tamaño del botón
+                width: MediaQuery.of(context).size.width * 0.6, // Ajusta el valor para modificar el tamaño del botón
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
