@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'ImageMethods.dart';
 
+//pendent--> quan se canvia el color no se guarda amb el format que toca
 class IdeesPage extends StatefulWidget {
   const IdeesPage({Key? key}) : super(key: key);
 
@@ -33,8 +34,11 @@ class _IdeesPageState extends State<IdeesPage> {
             borderRadius: BorderRadius.all(Radius.circular(15.0)),
           ),
           child: Container(
-            width: MediaQuery.of(context).size.width, // Adjust the width as desired
-            height: MediaQuery.of(context).size.height * 0.5, // Adjust the height as desired
+            width: MediaQuery.of(context)
+                .size
+                .width, // Adjust the width as desired
+            height: MediaQuery.of(context).size.height *
+                0.5, // Adjust the height as desired
             child: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.all(50),
@@ -71,7 +75,11 @@ class _IdeesPageState extends State<IdeesPage> {
                           final String nom = _nomController.text;
                           final String desc = _descController.text;
                           if (nom.isNotEmpty) {
-                            await _idees.doc().set({"nom": nom, "desc": desc});
+                            await _idees.doc().set({
+                              "nom": nom,
+                              "desc": desc,
+                              "color": "#FFEFD5",
+                            });
                             _nomController.clear();
                             _descController.clear();
                             Navigator.of(context).pop();
@@ -124,9 +132,6 @@ class _IdeesPageState extends State<IdeesPage> {
     );
   }
 
-
-
-
   Future<void> _update([DocumentSnapshot? documentSnapshot]) async {
     if (documentSnapshot != null) {
       _nomController.text = documentSnapshot['nom'];
@@ -140,9 +145,10 @@ class _IdeesPageState extends State<IdeesPage> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
+          backgroundColor: Color(
+              int.parse(documentSnapshot?['color'].substring(1, 7), radix: 16) +
+                  0xFF000000),
           child: Container(
-            width: MediaQuery.of(context).size.width, // Adjust the width as desired
-            height: MediaQuery.of(context).size.height * 0.5,
             padding: EdgeInsets.all(50),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -165,34 +171,64 @@ class _IdeesPageState extends State<IdeesPage> {
                   ),
                   maxLines: null,
                 ),
-                const SizedBox(height: 130),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FloatingActionButton(
-                      onPressed: () async {
-                        final String nom = _nomController.text;
-                        final String desc = _descController.text;
-                        await _idees.doc(documentSnapshot!.id).update({"nom": nom, "desc": desc});
-                        _nomController.clear();
-                        _descController.clear();
-                        Navigator.of(context).pop();
-                      },
-                      backgroundColor: customColor,
-                      mini: true,
-                      child: const Icon(Icons.save),
+                const SizedBox(height: 60),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FloatingActionButton(
+                          onPressed: () async {
+                            await _changeColor(documentSnapshot!.id);
+                            Navigator.of(context).pop();
+                          },
+                          backgroundColor: customColor,
+                          mini: true,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                5), // Adjust the value as desired
+                          ),
+                          child: const Icon(Icons.palette),
+                        ),
+                        SizedBox(width: 0.8),
+                        FloatingActionButton(
+                          onPressed: () async {
+                            final String nom = _nomController.text;
+                            final String desc = _descController.text;
+                            await _idees.doc(documentSnapshot!.id).update({
+                              "nom": nom,
+                              "desc": desc,
+                            });
+                            _nomController.clear();
+                            _descController.clear();
+                            Navigator.of(context).pop();
+                          },
+                          backgroundColor: customColor,
+                          mini: true,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                5), // Adjust the value as desired
+                          ),
+                          child: const Icon(Icons.save),
+                        ),
+                        SizedBox(width: 0.8),
+                        FloatingActionButton(
+                          onPressed: () async {
+                            await _delete(documentSnapshot!.id);
+                            Navigator.of(context).pop();
+                          },
+                          backgroundColor: customColor,
+                          mini: true,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                5), // Adjust the value as desired
+                          ),
+                          child: const Icon(Icons.delete),
+                        ),
+                      ],
                     ),
-                    SizedBox(width: 0.8),
-                    FloatingActionButton(
-                      onPressed: () async {
-                        await _delete(documentSnapshot!.id);
-                        Navigator.of(context).pop();
-                      },
-                      backgroundColor: customColor,
-                      mini: true,
-                      child: const Icon(Icons.delete),
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),
@@ -201,7 +237,6 @@ class _IdeesPageState extends State<IdeesPage> {
       },
     );
   }
-
 
   Future<void> _delete(String id) async {
     bool confirmDelete = await showDialog(
@@ -251,6 +286,247 @@ class _IdeesPageState extends State<IdeesPage> {
     }
   }
 
+  Future<void> _changeColor(String id) async {
+    String selectedColor = ""; // Initialize with the default color
+
+    await showDialog(
+      context: context,
+      builder: (BuildContext ctx) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          //title: Text("Color"),
+          content: Container(
+            width: 100,
+            height: 110,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2),
+                  child: Wrap(
+                    spacing: 15,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() async {
+                            selectedColor = '#FA8072';
+                            final String nom = _nomController.text;
+                            final String desc = _descController.text;
+                            await _idees.doc(id).update({
+                              "nom": nom,
+                              "desc": desc,
+                              "color": selectedColor,
+                            });
+                            _nomController.clear();
+                            _descController.clear();
+                            Navigator.of(context).pop();
+                          });
+                        },
+                        child: ClipOval(
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            color: Color(
+                                int.parse('FA8072', radix: 16) + 0xFF000000),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() async {
+                            selectedColor = '#FFD700';
+                            final String nom = _nomController.text;
+                            final String desc = _descController.text;
+                            await _idees.doc(id).update({
+                              "nom": nom,
+                              "desc": desc,
+                              "color": selectedColor,
+                            });
+                            _nomController.clear();
+                            _descController.clear();
+                            Navigator.of(context).pop();
+                          });
+                        },
+                        child: ClipOval(
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            color: Color(
+                                int.parse('FFD700', radix: 16) + 0xFF000000),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() async {
+                            selectedColor = '#F0E68C';
+                            final String nom = _nomController.text;
+                            final String desc = _descController.text;
+                            await _idees.doc(id).update({
+                              "nom": nom,
+                              "desc": desc,
+                              "color": selectedColor,
+                            });
+                            _nomController.clear();
+                            _descController.clear();
+                            Navigator.of(context).pop();
+                          });
+                        },
+                        child: ClipOval(
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            color: Color(
+                                int.parse('F0E68C', radix: 16) + 0xFF000000),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() async {
+                            selectedColor = '#F4A460';
+                            final String nom = _nomController.text;
+                            final String desc = _descController.text;
+                            await _idees.doc(id).update({
+                              "nom": nom,
+                              "desc": desc,
+                              "color": selectedColor,
+                            });
+                            _nomController.clear();
+                            _descController.clear();
+                            Navigator.of(context).pop();
+                          });
+                        },
+                        child: ClipOval(
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            color: Color(
+                                int.parse('F4A460', radix: 16) + 0xFF000000),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  child: Wrap(
+                    spacing: 15,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() async {
+                            selectedColor = '#90EE90';
+                            final String nom = _nomController.text;
+                            final String desc = _descController.text;
+                            await _idees.doc(id).update({
+                              "nom": nom,
+                              "desc": desc,
+                              "color": selectedColor,
+                            });
+                            _nomController.clear();
+                            _descController.clear();
+                            Navigator.of(context).pop();
+                          });
+                        },
+                        child: ClipOval(
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            color: Color(
+                                int.parse('90EE90', radix: 16) + 0xFF000000),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() async {
+                            selectedColor = '#66CDAA';
+                            final String nom = _nomController.text;
+                            final String desc = _descController.text;
+                            await _idees.doc(id).update({
+                              "nom": nom,
+                              "desc": desc,
+                              "color": selectedColor,
+                            });
+                            _nomController.clear();
+                            _descController.clear();
+                            Navigator.of(context).pop();
+                          });
+                        },
+                        child: ClipOval(
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            color: Color(
+                                int.parse('66CDAA', radix: 16) + 0xFF000000),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() async {
+                            selectedColor = '#AFEEEE';
+                            final String nom = _nomController.text;
+                            final String desc = _descController.text;
+                            await _idees.doc(id).update({
+                              "nom": nom,
+                              "desc": desc,
+                              "color": selectedColor,
+                            });
+                            _nomController.clear();
+                            _descController.clear();
+                            Navigator.of(context).pop();
+                          });
+                        },
+                        child: ClipOval(
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            color: Color(
+                                int.parse('AFEEEE', radix: 16) + 0xFF000000),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() async {
+                            selectedColor = '#4169E1';
+                            final String nom = _nomController.text;
+                            final String desc = _descController.text;
+                            await _idees.doc(id).update({
+                              "nom": nom,
+                              "desc": desc,
+                              "color": selectedColor,
+                            });
+                            _nomController.clear();
+                            _descController.clear();
+                            Navigator.of(context).pop();
+                          });
+                        },
+                        child: ClipOval(
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            color: Color(
+                                int.parse('4169E1', radix: 16) + 0xFF000000),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -289,12 +565,22 @@ class _IdeesPageState extends State<IdeesPage> {
                   );
                 }
                 final DocumentSnapshot documentSnapshot = docs[index];
+                Color? cardColor;
+                if (documentSnapshot['color'] != null) {
+                  cardColor = Color(int.parse(
+                          documentSnapshot['color'].substring(1, 7),
+                          radix: 16) +
+                      0xFF000000);
+                } else {
+                  cardColor = Colors.white;
+                }
                 return GestureDetector(
                   onTap: () => _update(documentSnapshot),
                   child: Card(
-                    //margin: EdgeInsets.all(5),
+                    color: cardColor,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10), // Adjust the border radius as desired
+                      borderRadius: BorderRadius.circular(
+                          10), // Adjust the border radius as desired
                     ),
                     child: ListTile(
                       title: Text(documentSnapshot['nom']),
