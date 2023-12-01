@@ -3,7 +3,6 @@ import 'package:fang/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
-import 'ImageMethods.dart';
 
 //pendent--> quan se canvia el color no se guarda amb el format que toca
 class IdeesPage extends StatefulWidget {
@@ -579,12 +578,24 @@ class _IdeesPageState extends State<IdeesPage> {
                   child: Card(
                     color: cardColor,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          10), // Adjust the border radius as desired
+                      borderRadius: BorderRadius.circular(10), // Adjust the border radius as desired
                     ),
-                    child: ListTile(
-                      title: Text(documentSnapshot['nom']),
-                      subtitle: Text(documentSnapshot['desc']),
+                    child: Container(
+                      margin: EdgeInsets.symmetric(vertical: 10), // Add desired top and bottom margins
+                      child: ListTile(
+                        title: Text(documentSnapshot['nom']),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 8),
+                            Text(
+                              documentSnapshot['desc'],
+                              maxLines: 6, // Show only the first 7 lines
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 );
