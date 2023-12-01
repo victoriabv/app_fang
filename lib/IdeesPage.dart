@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 
-//pendent--> quan se canvia el color no se guarda amb el format que toca
 class IdeesPage extends StatefulWidget {
   const IdeesPage({Key? key}) : super(key: key);
 
